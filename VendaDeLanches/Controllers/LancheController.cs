@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VendaDeLanches.Repositories;
 using VendaDeLanches.Repositories.Interfaces;
+using VendaDeLanches.ViewModels;
 
 namespace VendaDeLanches.Controllers
 {
@@ -15,15 +16,12 @@ namespace VendaDeLanches.Controllers
 
         public IActionResult List()
         {
-            ViewData["Titulo"] = "Todos os Lanches";
-            ViewData["Data"] = DateTime.Now;
-
-            var lanches = _lancheRepository.Lanches;
-            var totalLanches = lanches.Count();
-
-            ViewBag.Total = "Total de Lanches";
-            ViewBag.TotalLanches = totalLanches;
-            return View(lanches);
+            //var lanches = _lancheRepository.Lanches;
+            //return View(lanches);
+            var lanchesListViewModel = new LancheListViewModel();
+            lanchesListViewModel.Lanches = _lancheRepository.Lanches;
+            lanchesListViewModel.CategoriaAtual = "Categoria Atual";
+            return View(lanchesListViewModel);
         }
     }
 }
